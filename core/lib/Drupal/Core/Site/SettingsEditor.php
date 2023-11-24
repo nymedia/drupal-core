@@ -47,6 +47,9 @@ final class SettingsEditor {
    * @throws \Exception
    */
   public static function rewrite(string $settings_file, array $settings = []): void {
+    if (@file_exists(\Drupal::getContainer()->getParameter('site.path') . '/settings.local.php')) {
+      $settings_file = \Drupal::getContainer()->getParameter('site.path') . '/settings.local.php';
+    }
     // Build list of setting names and insert the values into the global
     // namespace.
     $variable_names = [];
